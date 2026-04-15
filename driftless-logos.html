@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Driftless — Concept 03 Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0e0f13;
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    padding: 72px 40px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #e8eaf0;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  header p {
+    font-size: 0.6rem;
+    color: #444;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 56px;
+  }
+
+  .section-label {
+    font-size: 0.58rem;
+    color: #333;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    max-width: 780px;
+    margin: 48px auto 10px;
+    padding-left: 2px;
+  }
+
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: #13141a;
+    border: 1px solid #1c1e26;
+    padding: 56px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    transition: border-color 0.25s;
+    position: relative;
+  }
+
+  .card:hover { border-color: #2a2d3a; }
+
+  /* Dark background variants */
+  .card.bg-dark { background: #0a0b0f; }
+  /* Light background variants */
+  .card.bg-light { background: #f4f3ef; }
+  /* Colored accent backgrounds */
+  .card.bg-teal  { background: #021a16; }
+  .card.bg-amber { background: #1a1200; }
+
+  .logo-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .meta {
+    width: 140px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .meta .num {
+    font-size: 0.58rem;
+    color: #2e3040;
+    letter-spacing: 0.2em;
+    margin-bottom: 5px;
+  }
+
+  .card.bg-light .meta .num { color: #ccc; }
+
+  .meta .label {
+    font-size: 0.58rem;
+    color: #444;
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+  }
+
+  .card.bg-light .meta .label { color: #aaa; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Driftless</h1>
+  <p>Concept 03 — Waveform Mark · Variants</p>
+</header>
+
+<!-- ── SECTION: MARK EXPLORATIONS ─────────────────── -->
+<div class="section-label">Mark explorations</div>
+<div class="grid">
+
+  <!-- V1: Original refined — noisy → clean, white/grey palette -->
+  <div class="card">
+    <div class="logo-wrap">
+      <svg width="290" height="68" viewBox="0 0 290 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Noisy wave -->
+        <polyline points="0,28 7,14 14,38 21,16 28,32 34,28"
+          stroke="#444" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Divider tick -->
+        <line x1="40" y1="14" x2="40" y2="42" stroke="#252830" stroke-width="1"/>
+        <!-- Clean resolved line -->
+        <line x1="46" y1="28" x2="74" y2="28" stroke="#e8eaf0" stroke-width="2" stroke-linecap="round"/>
+        <!-- Terminal dot -->
+        <circle cx="74" cy="28" r="3.5" fill="#e8eaf0"/>
+        <!-- Wordmark -->
+        <text x="94" y="36" font-size="26" fill="#e8eaf0" font-family="Syne, sans-serif" font-weight="700" letter-spacing="-0.01em">driftless</text>
+        <text x="94" y="52" font-size="6.5" fill="#333" font-family="DM Mono, monospace" letter-spacing="0.2em">PROMPT TRANSLATION LAYER</text>
+      </svg>
+    </div>
+    <div class="meta">
+      <div class="num">V1</div>
+      <div class="label">Original refined — neutral palette</div>
+    </div>
+  </div>
+
+  <!-- V2: Teal accent on the resolved line only -->
+  <div class="card bg-teal">
+    <div class="logo-wrap">
+      <svg width="290" height="68" viewBox="0 0 290 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Noisy wave, muted -->
+        <polyline points="0,28 7,14 14,38 21,16 28,32 34,28"
+          stroke="#1a4a3a" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Divider -->
+        <line x1="40" y1="14" x2="40" y2="42" stroke="#0d2e24" stroke-width="1"/>
+        <!-- Clean line, teal -->
+        <line x1="46" y1="28" x2="74" y2="28" stroke="#00c9a0" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="74" cy="28" r="3.5" fill="#00c9a0"/>
+        <!-- Wordmark -->
+        <text x="94" y="36" font-size="26" fill="#d8f5ee" font-family="Syne, sans-serif" font-weight="700" letter-spacing="-0.01em">driftless</text>
+        <text x="94" y="52" font-size="6.5" fill="#1a5a46" font-family="DM Mono, monospace" letter-spacing="0.2em">PROMPT TRANSLATION LAYER</text>
+      </svg>
+    </div>
+    <div class="meta">
+      <div class="num">V2</div>
+      <div class="label">Teal accent — resolution highlighted</div>
+    </div>
+  </div>
+
+  <!-- V3: Amber — warm, engineering feel -->
+  <div class="card bg-amber">
+    <div class="logo-wrap">
+      <svg width="290" height="68" viewBox="0 0 290 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Noisy wave, muted warm -->
+        <polyline points="0,28 7,14 14,38 21,16 28,32 34,28"
+          stroke="#3a2800" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="40" y1="14" x2="40" y2="42" stroke="#221800" stroke-width="1"/>
+        <!-- Clean line, amber -->
+        <line x1="46" y1="28" x2="74" y2="28" stroke="#ffb340" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="74" cy="28" r="3.5" fill="#ffb340"/>
+        <!-- Wordmark -->
+        <text x="94" y="36" font-size="26" fill="#f5e8cc" font-family="Syne, sans-serif" font-weight="700" letter-spacing="-0.01em">driftless</text>
+        <text x="94" y="52" font-size="6.5" fill="#5a3d00" font-family="DM Mono, monospace" letter-spacing="0.2em">PROMPT TRANSLATION LAYER</text>
+      </svg>
+    </div>
+    <div class="meta">
+      <div class="num">V3</div>
+      <div class="label">Amber accent — warm engineering tone</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── SECTION: MARK SIZE & WEIGHT ─────────────────── -->
+<div class="section-label">Mark weight & proportion</div>
+<div class="grid">
+
+  <!-- V4: Heavier mark, icon-first layout -->
+  <div class="card">
+    <div class="logo-wrap">
+      <svg width="290" height="76" viewBox="0 0 290 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Larger bolder waveform -->
+        <polyline points="0,36 9,16 18,50 27,18 36,42 44,36"
+          stroke="#2e3240" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="52" y1="16" x2="52" y2="56" stroke="#252830" stroke-width="1.2"/>
+        <!-- Clean line, heavier -->
+        <line x1="60" y1="36" x2="96" y2="36" stroke="#e8eaf0" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="96" cy="36" r="5" fill="#e8eaf0"/>
+        <!-- Wordmark, tighter tracking -->
+        <text x="116" y="44" font-size="28" fill="#e8eaf0" font-family="Syne, sans-serif" font-weight="800" letter-spacing="-0.02em">driftless</text>
+      </svg>
+    </div>
+    <div class="meta">
+      <div class="num">V4</div>
+      <div class="label">Bold mark, heavy weight wordmark</div>
+    </div>
+  </div>
+
+  <!-- V5: Icon-only + stacked wordmark, centered -->
+  <div class="card">
+    <div class="logo-wrap">
+      <svg width="240" height="80" viewBox="0 0 240 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Centered mark above wordmark -->
+        <g transform="translate(60, 0)">
+          <polyline points="0,22 7,8 14,32 21,10 28,26 33,22"
+            stroke="#444" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="38" y1="10" x2="38" y2="34" stroke="#252830" stroke-width="1"/>
+          <line x1="43" y1="22" x2="62" y2="22" stroke="#00c9a0" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="62" cy="22" r="3" fill="#00c9a0"/>
+        </g>
+        <!-- Centered wordmark below -->
+        <text x="120" y="62" font-size="24" fill="#e8eaf0" font-family="Syne, sans-serif" font-weight="700" letter-spacing="0.08em" text-anchor="middle">DRIFTLESS</text>
+        <text x="120" y="76" font-size="6" fill="#333" font-family="DM Mono, monospace" letter-spacing="0.22em" text-anchor="middle">PROMPT TRANSLATION</text>
+      </svg>
+    </div>
+    <div class="meta">
+      <div class="num">V5</div>
+      <div class="label">Stacked lockup — icon above wordmark</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── SECTION: LIGHT MODE ─────────────────── -->
+<div class="section-label">Light mode</div>
+<div class="grid">
+
+  <!-- V6: Light bg, dark mark -->
+  <div class="card bg-light">
+    <div class="logo-wrap">
+      <svg width="290" height="68" viewBox="0 0 290 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Noisy wave, light mode -->
+        <polyline points="0,28 7,14 14,38 21,16 28,32 34,28"
+          stroke="#ccc" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="40" y1="14" x2="40" y2="42" stroke="#ddd" stroke-width="1"/>
+        <!-- Clean line, dark -->
+        <line x1="46" y1="28" x2="74" y2="28" stroke="#111" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="74" cy="28" r="3.5" fill="#111"/>
+        <!-- Wordmark -->
+        <text x="94" y="36" font-size="26" fill="#111" font-family="Syne, sans-serif" font-weight="700" letter-spacing="-0.01em">driftless</text>
+        <text x="94" y="52" font-size="6.5" fill="#bbb" font-family="DM Mono, monospace" letter-spacing="0.2em">PROMPT TRANSLATION LAYER</text>
+      </svg>
+    </div>
+    <div class="meta">
+      <div class="num">V6</div>
+      <div class="label">Light mode — paper white</div>
+    </div>
+  </div>
+
+  <!-- V7: Light bg + teal accent -->
+  <div class="card bg-light">
+    <div class="logo-wrap">
+      <svg width="290" height="68" viewBox="0 0 290 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="0,28 7,14 14,38 21,16 28,32 34,28"
+          stroke="#ccc" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="40" y1="14" x2="40" y2="42" stroke="#ddd" stroke-width="1"/>
+        <line x1="46" y1="28" x2="74" y2="28" stroke="#009b7a" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="74" cy="28" r="3.5" fill="#009b7a"/>
+        <text x="94" y="36" font-size="26" fill="#111" font-family="Syne, sans-serif" font-weight="700" letter-spacing="-0.01em">driftless</text>
+        <text x="94" y="52" font-size="6.5" fill="#bbb" font-family="DM Mono, monospace" letter-spacing="0.2em">PROMPT TRANSLATION LAYER</text>
+      </svg>
+    </div>
+    <div class="meta">
+      <div class="num">V7</div>
+      <div class="label">Light mode + teal resolution accent</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── SECTION: ICON ONLY ─────────────────── -->
+<div class="section-label">Icon mark — standalone</div>
+<div class="grid">
+
+  <div class="card">
+    <div class="logo-wrap" style="gap: 48px;">
+
+      <!-- Small -->
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="0,20 4,10 8,27 12,11 16,22 19,20"
+          stroke="#444" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="22" y1="10" x2="22" y2="30" stroke="#252830" stroke-width="0.8"/>
+        <line x1="25" y1="20" x2="37" y2="20" stroke="#00c9a0" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="37" cy="20" r="3" fill="#00c9a0"/>
+      </svg>
+
+      <!-- Medium -->
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="0,32 7,14 14,46 21,16 28,38 33,32"
+          stroke="#444" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="38" y1="14" x2="38" y2="50" stroke="#252830" stroke-width="1.2"/>
+        <line x1="43" y1="32" x2="60" y2="32" stroke="#00c9a0" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="60" cy="32" r="4" fill="#00c9a0"/>
+      </svg>
+
+      <!-- Large -->
+      <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="0,48 10,22 20,68 30,24 40,56 48,48"
+          stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="56" y1="20" x2="56" y2="76" stroke="#252830" stroke-width="1.5"/>
+        <line x1="63" y1="48" x2="90" y2="48" stroke="#00c9a0" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="90" cy="48" r="6" fill="#00c9a0"/>
+      </svg>
+
+    </div>
+    <div class="meta">
+      <div class="num">V8</div>
+      <div class="label">Icon mark at 3 scales — favicon to app icon</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
