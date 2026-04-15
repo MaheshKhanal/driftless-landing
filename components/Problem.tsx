@@ -66,8 +66,8 @@ export default function Problem() {
                 </div>
 
                 <div className="border-t border-brand-border pt-4">
-                  <span className="text-[#ff4d4d] opacity-70">// After — claude-sonnet-4 (2024-11-15) ← silent update</span>
-                  <pre className="mt-1 text-[11px] text-[#ff6b6b] opacity-60 whitespace-pre-wrap">
+                  <span className="text-[#ff6b6b] opacity-90">// After — claude-sonnet-4 (2024-11-15) ← silent update</span>
+                  <pre className="mt-1 text-[11px] text-[#ff8080] opacity-80 whitespace-pre-wrap">
 {`{
   "sentiment": "neutral",
   "confidence": 0.61,

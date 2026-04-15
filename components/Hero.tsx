@@ -125,11 +125,11 @@ function HeroVisual() {
       <circle cx="20" cy="18" r="4" fill="#1c1e26" />
       <circle cx="34" cy="18" r="4" fill="#1c1e26" />
       <circle cx="48" cy="18" r="4" fill="#1c1e26" />
-      <text x="68" y="23" fontSize="9" fill="#333" fontFamily={mono} letterSpacing="0.15em">
+      <text x="68" y="23" fontSize="9" fill="#777" fontFamily={mono} letterSpacing="0.15em">
         RESPONSE QUALITY MONITOR
       </text>
       {["HIGH", "MED", "LOW"].map((label, i) => (
-        <text key={label} x="8" y={[90, 140, 190][i]} fontSize="7" fill="#2a2d3a" fontFamily={mono} letterSpacing="0.1em">
+        <text key={label} x="8" y={[90, 140, 190][i]} fontSize="7" fill="#666" fontFamily={mono} letterSpacing="0.1em">
           {label}
         </text>
       ))}
@@ -208,11 +208,11 @@ function HeroVisual() {
       {/* ── LEGEND — fade in with baseline ── */}
       <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0, duration: 0.5 }}>
         <circle cx="60" cy="248" r="3" fill="#00c9a0" />
-        <text x="68" y="252" fontSize="8" fill="#444" fontFamily={mono} letterSpacing="0.1em">BASELINE</text>
+        <text x="68" y="252" fontSize="8" fill="#888" fontFamily={mono} letterSpacing="0.1em">BASELINE</text>
         <rect x="148" y="244" width="16" height="1.5" fill="#00c9a0" opacity="0.35" />
-        <text x="168" y="252" fontSize="8" fill="#444" fontFamily={mono} letterSpacing="0.1em">DRIFT DETECTED</text>
+        <text x="168" y="252" fontSize="8" fill="#888" fontFamily={mono} letterSpacing="0.1em">DRIFT DETECTED</text>
         <circle cx="280" cy="248" r="3" fill="#ff4d4d" opacity="0.6" />
-        <text x="288" y="252" fontSize="8" fill="#444" fontFamily={mono} letterSpacing="0.1em">MODEL CHANGE</text>
+        <text x="288" y="252" fontSize="8" fill="#888" fontFamily={mono} letterSpacing="0.1em">MODEL CHANGE</text>
       </motion.g>
     </motion.svg>
   );
