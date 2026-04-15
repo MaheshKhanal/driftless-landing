@@ -18,7 +18,7 @@ npm run lint     # ESLint
 
 ## Architecture
 
-Single-page Next.js 15 app using the App Router. No backend — forms are UI-only.
+Single-page Next.js 16 app using the App Router. No backend — forms are UI-only.
 
 **Entry points:**
 - `app/layout.tsx` — font setup (Syne + DM Mono via `next/font/google`), global metadata
