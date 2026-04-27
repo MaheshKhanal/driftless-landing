@@ -68,23 +68,19 @@ function MetricRow({
 function DriftAnimation() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [tick, setTick] = useState(0);
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
     if (!isInView) return;
-    setPhase(0);
     const t1 = setTimeout(() => setPhase(1), 2200);
     const t2 = setTimeout(() => setPhase(2), 3800);
     const t3 = setTimeout(() => setPhase(3), 5400);
-    const t4 = setTimeout(() => setTick((n) => n + 1), 9500);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
-      clearTimeout(t4);
     };
-  }, [tick, isInView]);
+  }, [isInView]);
 
   return (
     <div ref={ref} className="bg-brand-card border border-brand-border overflow-hidden h-full min-h-[500px]">

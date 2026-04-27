@@ -203,7 +203,7 @@ const steps = [
   {
     num: "04",
     title: "Your prompt is fixed and ready",
-    body: "Driftless doesn't just alert you — it translates your prompt to work correctly again. Write it once and it adapts automatically to work on Claude, GPT-4o, Gemini, and more.",
+    body: "Driftless doesn't just alert you — it translates your prompt to work correctly again. Write it once and it adapts automatically across Claude, GPT-4o, Gemini, and more. Guardrails keep every response in check so nothing bad slips through.",
     visual: <TranslateVisual />,
   },
 ];
