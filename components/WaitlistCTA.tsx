@@ -76,7 +76,7 @@ export default function WaitlistCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-mono text-xs tracking-[0.3em] uppercase text-brand-faint mb-4">
+          <p className="font-mono text-xs tracking-[0.3em] uppercase text-brand-teal mb-4">
             Early Access
           </p>
           <h2 className="font-syne font-extrabold text-3xl md:text-4xl text-brand-text mb-4 leading-tight">

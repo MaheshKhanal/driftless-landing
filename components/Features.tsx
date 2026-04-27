@@ -14,7 +14,7 @@ const stagger = {
 const features = [
   {
     id: "drift",
-    overline: "Feature 01",
+    overline: "Model Observability",
     title: "Drift Monitoring",
     description:
       "Continuously baselines your LLM responses. The moment a model update changes behavior, you know — before your users do.",
@@ -28,7 +28,7 @@ const features = [
   },
   {
     id: "translation",
-    overline: "Feature 02",
+    overline: "Prompt Portability",
     title: "Prompt Translation",
     description:
       "Write prompts once. Driftless translates them to work optimally across Claude, GPT-4o, Gemini, and more — preserving intent and structure.",
@@ -54,13 +54,13 @@ export default function Features() {
         >
           <motion.p
             variants={fadeUp}
-            className="font-mono text-xs tracking-[0.3em] uppercase text-brand-faint mb-4"
+            className="font-mono text-xs tracking-[0.3em] uppercase text-brand-teal mb-4"
           >
             What Driftless Does
           </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="font-syne font-bold text-2xl md:text-3xl text-brand-text mb-16 max-w-2xl"
+            className="font-syne font-extrabold text-3xl md:text-4xl text-brand-text mb-16 max-w-2xl"
           >
             Everything you need to ship{" "}
             <span className="text-gradient-teal">reliable AI</span>

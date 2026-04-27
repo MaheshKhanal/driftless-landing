@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -10,6 +11,177 @@ const fadeUp = {
 const stagger = {
   visible: { transition: { staggerChildren: 0.12 } },
 };
+
+const beforeMetrics = [
+  { label: "sentiment", value: "positive", pct: 94, color: "#28c840" },
+  { label: "accuracy", value: "94%", pct: 94, color: "#28c840" },
+  { label: "answer quality", value: "full", pct: 100, color: "#28c840" },
+];
+
+const afterMetrics = [
+  { label: "sentiment", value: "neutral", pct: 61, delta: "↓35%", color: "#ff6b6b" },
+  { label: "accuracy", value: "61%", pct: 61, delta: "↓33pts", color: "#ff6b6b" },
+  { label: "answer quality", value: "partial", pct: 38, color: "#ff8c42" },
+];
+
+type Metric = {
+  label: string;
+  value: string;
+  pct: number;
+  delta?: string;
+  color: string;
+};
+
+function MetricRow({
+  label,
+  value,
+  pct,
+  delta,
+  color,
+  inView,
+  delay = 0,
+}: Metric & { inView: boolean; delay?: number }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="font-mono text-[10px] text-brand-faint w-24 shrink-0">{label}</span>
+      <div className="flex-1 h-[3px] bg-brand-border rounded-full overflow-hidden">
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: inView ? `${pct}%` : "0%" }}
+          transition={{ duration: 0.7, delay, ease: "easeOut" }}
+          className="h-full rounded-full"
+          style={{ backgroundColor: color }}
+        />
+      </div>
+      <span className="font-mono text-[10px] w-16 text-right shrink-0" style={{ color }}>
+        {value}
+      </span>
+      {delta && (
+        <span className="font-mono text-[10px] text-[#ff6b6b] opacity-60 w-10 shrink-0">
+          {delta}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function DriftAnimation() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const [tick, setTick] = useState(0);
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    setPhase(0);
+    const t1 = setTimeout(() => setPhase(1), 2200);
+    const t2 = setTimeout(() => setPhase(2), 3800);
+    const t3 = setTimeout(() => setPhase(3), 5400);
+    const t4 = setTimeout(() => setTick((n) => n + 1), 9500);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+    };
+  }, [tick, isInView]);
+
+  return (
+    <div ref={ref} className="bg-brand-card border border-brand-border overflow-hidden h-full min-h-[500px]">
+      <div className="p-6 space-y-4">
+        {/* Prompt */}
+        <div className="flex items-center gap-2 font-mono text-[11px] text-brand-muted bg-[#0d0e12] px-3 py-2 border border-brand-border">
+          <span className="text-brand-teal shrink-0">→</span>
+          <span>&quot;Summarize and classify: support message #4821&quot;</span>
+        </div>
+
+        {/* Before card */}
+        <div className="bg-[#0d0e12] border border-brand-border p-3 space-y-2.5">
+          <span className="font-mono text-[10px] text-brand-faint block">
+            claude-sonnet-4 · Oct 2025
+          </span>
+          {beforeMetrics.map((m, i) => (
+            <MetricRow key={m.label} {...m} inView={isInView} delay={0.3 + i * 0.1} />
+          ))}
+        </div>
+
+        {/* Silent update divider */}
+        <AnimatePresence>
+          {phase >= 1 && (
+            <motion.div
+              key="divider"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-3"
+            >
+              <div className="flex-1 h-px bg-[#ff6b6b] opacity-20" />
+              <span className="font-mono text-[10px] text-[#ff6b6b] opacity-60 flex items-center gap-1.5 shrink-0">
+                ⚡ silent update · Mar 7, 2026
+              </span>
+              <div className="flex-1 h-px bg-[#ff6b6b] opacity-20" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* After card */}
+        <AnimatePresence>
+          {phase >= 2 && (
+            <motion.div
+              key="after-card"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.4 }}
+              className="bg-brand-bg border border-[#ff6b6b]/20 p-3 space-y-2.5"
+            >
+              <span className="font-mono text-[10px] text-[#ff6b6b] opacity-70 block">
+                claude-sonnet-4 · Mar 7, 2026
+              </span>
+              {afterMetrics.map((m, i) => (
+                <MetricRow key={m.label} {...m} inView={true} delay={0.1 + i * 0.1} />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Alert */}
+        <AnimatePresence>
+          {phase >= 3 && (
+            <motion.div
+              key="alert"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="border border-brand-teal/30 bg-brand-teal/5 p-3 font-mono text-[11px]"
+            >
+              <div className="text-brand-teal mb-2 flex items-center gap-2">
+                <span>⚠</span>
+                <span>Your AI started behaving differently</span>
+              </div>
+              <div className="space-y-1.5 text-brand-muted">
+                <div className="flex items-start gap-2">
+                  <span className="text-[#ff8080] shrink-0">—</span>
+                  <span>Accuracy dropped <span className="text-[#ff8080]">35%</span> compared to last week</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-[#ff8080] shrink-0">—</span>
+                  <span>Two of your AI features are giving wrong answers</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-brand-teal shrink-0">—</span>
+                  <span className="text-brand-teal">A fix is ready for your team to review</span>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
 
 export default function Problem() {
   return (
@@ -23,73 +195,25 @@ export default function Problem() {
         >
           <motion.p
             variants={fadeUp}
-            className="font-mono text-xs tracking-[0.3em] uppercase text-brand-faint mb-4"
+            className="font-mono text-xs tracking-[0.3em] uppercase text-brand-teal mb-4"
           >
             The Problem
           </motion.p>
           <motion.h2
             variants={fadeUp}
-            className="font-syne font-bold text-2xl md:text-3xl text-brand-text mb-16 max-w-2xl"
+            className="font-syne font-extrabold text-3xl md:text-4xl text-brand-text mb-16 max-w-2xl"
           >
             Silent model updates are a{" "}
             <span className="text-gradient-teal">hidden liability</span>
           </motion.h2>
 
           <div className="grid lg:grid-cols-2 gap-2">
-            {/* Left: terminal block */}
-            <motion.div
-              variants={fadeUp}
-              className="bg-[#0d0e12] border border-brand-border font-mono text-xs leading-loose"
-            >
-              {/* Terminal bar */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-brand-border bg-[#0a0b0f]">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-                <span className="ml-2 text-brand-faint tracking-widest uppercase text-[10px]">
-                  response_diff.log
-                </span>
-              </div>
-
-              <div className="p-6 space-y-4">
-                <div>
-                  <span className="text-brand-faint">// Before — claude-sonnet-4 (2024-10-01)</span>
-                  <pre className="mt-1 text-[11px] text-brand-muted whitespace-pre-wrap">
-{`{
-  "sentiment": "positive",
-  "confidence": 0.94,
-  "reasoning": "The customer clearly
-    expressed satisfaction with the
-    onboarding flow and pricing model."
-}`}
-                  </pre>
-                </div>
-
-                <div className="border-t border-brand-border pt-4">
-                  <span className="text-[#ff6b6b] opacity-90">// After — claude-sonnet-4 (2024-11-15) ← silent update</span>
-                  <pre className="mt-1 text-[11px] text-[#ff8080] opacity-80 whitespace-pre-wrap">
-{`{
-  "sentiment": "neutral",
-  "confidence": 0.61,
-  "reasoning": "Insufficient context
-    to determine sentiment accurately."
-}`}
-                  </pre>
-                </div>
-
-                <div className="border-t border-brand-border pt-4">
-                  <span className="text-brand-teal">// Driftless alert — 14 Nov, 02:41 UTC</span>
-                  <pre className="mt-1 text-[11px] text-brand-teal opacity-80 whitespace-pre-wrap">
-{`⚠  Drift detected on prod/sentiment-classifier
-   Confidence delta: -0.33 (↓35%)
-   Affected routes: /api/analyze, /api/report
-   Suggested fix: prompt_v2_translated.txt`}
-                  </pre>
-                </div>
-              </div>
+            {/* Left: animated visualization */}
+            <motion.div variants={fadeUp}>
+              <DriftAnimation />
             </motion.div>
 
-            {/* Right: prose */}
+            {/* Right: prose steps */}
             <motion.div variants={stagger} className="flex flex-col gap-6 py-2">
               {[
                 {
@@ -104,8 +228,8 @@ export default function Problem() {
                 },
                 {
                   label: "03",
-                  title: "There's no easy fix",
-                  body: "You either pin the model version (losing improvements) or rewrite your prompts. Except each provider has different behavior — what works on Claude doesn't work on GPT-4o.",
+                  title: "The damage compounds",
+                  body: "Misclassifications accumulate. Downstream pipelines receive bad data. Customer-facing features silently degrade. By the time a ticket gets filed, the blast radius is already wide.",
                 },
               ].map((item) => (
                 <motion.div
